@@ -4,12 +4,12 @@ format = """
 [](surface0)\
 $os\
 $username\
-[](bg:peach fg:surface0)\
+[](bg:red fg:surface0)\
 $directory\
-[](fg:peach bg:green)\
+[](fg:red bg:purple)\
 $git_branch\
 $git_status\
-[](fg:green bg:teal)\
+[](fg:purple bg:teal)\
 $c\
 $rust\
 $golang\
@@ -19,14 +19,45 @@ $java\
 $kotlin\
 $haskell\
 $python\
-[](fg:teal bg:blue)\
+[](fg:teal bg:green)\
 $docker_context\
-[](fg:blue bg:purple)\
+[](fg:green bg:blue)\
 $time\
-[ ](fg:purple)\
+[ ](fg:blue)\
 $line_break$character"""
 
-palette = 'catppuccin_mocha'
+palette = 'berserk'
+
+[palettes.berserk]
+# your original Berserk colors
+text        = "#EDE6DB"
+subtext1    = "#bac2de"
+subtext0    = "#a6adc8"
+bg0         = "#2B2B2B"
+bg1         = "#1F1F1F"
+bg2         = "#171717"
+red         = "#7F0909"
+orange      = "#B8860B"
+yellow      = "#D4AF37"
+green       = "#6B8E23"
+blue        = "#3E4A89"
+purple      = "#5D1451"
+cyan        = "#4B8E8D"
+white       = "#FFFFFF"
+black       = "#000000"
+
+# aliases so your format’s surface0, peach, teal, etc. still work
+overlay2    = "#9399b2"
+overlay1    = "#7f849c"
+overlay0    = "#6c7086"
+surface2    = "#585b70"
+surface1    = "#1F1F1F"  # == bg1 (if you need it)
+surface0    = "#2B2B2B"  # == bg0
+peach       = "#B8860B"  # == orange
+teal        = "#5D1451"  # == Purple
+base        = "#1e1e2e"
+mantle      = "#181825"
+crust       = "#11111b"
 
 [palettes.gruvbox_dark]
 color_fg0 = '#fbf1c7'
@@ -100,7 +131,7 @@ style_root = "bg:surface0 fg:text"
 format = '[ $user ]($style)'
 
 [directory]
-style = "fg:mantle bg:peach"
+style = "fg:white bg:red"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -114,56 +145,56 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:teal"
-format = '[[ $symbol $branch ](fg:base bg:green)]($style)'
+style = "fg:black bg:yellow"
+format = '[[ $symbol $branch ](fg:base bg:purple)]($style)'
 
 [git_status]
-style = "bg:teal"
-format = '[[($all_status$ahead_behind )](fg:base bg:green)]($style)'
+style = "fg:black bg:yellow"
+format = '[[($all_status$ahead_behind )](fg:base bg:purple)]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:teal"
+style = "fg:black bg:yellow"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
 [c]
 symbol = " "
-style = "bg:teal"
+style = "fg:black bg:yellow"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
 [rust]
 symbol = ""
-style = "bg:teal"
+style = "fg:black bg:yellow"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
 [golang]
 symbol = ""
-style = "bg:teal"
+style = "fg:black bg:yellow"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
 [php]
 symbol = ""
-style = "bg:teal"
+style = "fg:black bg:yellow"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
 [java]
 symbol = " "
-style = "bg:teal"
+style = "fg:black bg:yellow"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
 [kotlin]
 symbol = ""
-style = "bg:teal"
+style = "fg:black bg:yellow"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
 [haskell]
 symbol = ""
-style = "bg:teal"
+style = "fg:black bg:yellow"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
 [python]
 symbol = ""
-style = "bg:teal"
+style = "fg:black bg:yellow"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
 [docker_context]
@@ -172,10 +203,10 @@ style = "bg:mantle"
 format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
 
 [time]
-disabled = false
+disabled    = false
 time_format = "%R"
-style = "bg:peach"
-format = '[[  $time ](fg:mantle bg:purple)]($style)'
+style       = "fg:mantle bg:blue"
+format      = '[[  $time ](fg:mantle bg:blue)]($style)'
 
 [line_break]
 disabled = false
@@ -185,6 +216,6 @@ disabled = false
 success_symbol = '[](bold fg:green)'
 error_symbol = '[](bold fg:red)'
 vimcmd_symbol = '[](bold fg:creen)'
-vimcmd_replace_one_symbol = '[](bold fg:purple)'
-vimcmd_replace_symbol = '[](bold fg:purple)'
-vimcmd_visual_symbol = '[](bold fg:lavender)'
+vimcmd_replace_one_symbol = '[](bold fg:blue)'
+vimcmd_replace_symbol = '[](bold fg:blue)'
+vimcmd_visual_symbol = '[](bold fg:red)'
