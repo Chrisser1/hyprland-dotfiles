@@ -2,7 +2,14 @@
   "position": "top",
   "modules-left": ["hyprland/workspaces", "custom/spotify"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["custom/wallpaper","network","pulseaudio","battery","clock"],
+  "modules-right": [
+    "custom/wallpaper",
+    "network#eth",
+    "network#wifi",
+    "pulseaudio",
+    "battery",
+    "clock"
+  ],
   "clock": {
     "format": "<span foreground='#f5c2e7'>   </span>{:%a %d %H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
@@ -22,13 +29,22 @@
     "format-icons": ["", "", "", "", ""],
     "tooltip-format": "{time}"
   },
-  "network": {
-    "format-wifi": "<span size='13000' foreground='#f5e0dc'>  </span>{essid}",
-    "format-ethernet": "<span size='13000' foreground='#f5e0dc'>󰤭  </span> Disconnected",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "<span size='13000' foreground='#f5e0dc'>  </span>Disconnected",
-    "tooltip-format-wifi": "Signal Strenght: {signalStrength}%"
+  // Ethernet‑only module
+  "network#eth": {
+    "interface": "en*",                          // match your Ethernet (e.g. enp3s0, enp4s0u2…)
+    "format-ethernet": "<span size='13000' foreground='#f5e0dc'>󰈀 </span>{ifname}: {ipaddr}",
+    "format-disconnected": "",                   // hide when unplugged
+    "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}"
   },
+
+  // Wi‑Fi‑only module
+  "network#wifi": {
+    "interface": "wlp*",                         // match your Wi‑Fi (e.g. wlp2s0)
+    "format-wifi":     "<span size='13000' foreground='#f5e0dc'> </span>{essid} ({signalStrength}%)",
+    "format-disconnected": "",                   // hide when down
+    "tooltip-format-wifi": "Signal Strength: {signalStrength}%"
+  },
+
   "pulseaudio": {
       "format": "{icon}  {volume}%",
       "format-muted": "",
