@@ -138,3 +138,13 @@ button:hover {
 #custom-spotify:hover {
     background-color: @surface2;
 }
+
+#custom-wallpaper {
+  color: @lavender;              /* Catppuccin Mocha colour */
+  border-bottom: 2px solid @lavender;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+#custom-wallpaper:hover {
+  background-color: @surface2;
+}

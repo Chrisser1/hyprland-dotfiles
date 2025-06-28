@@ -2,7 +2,7 @@
   "position": "top",
   "modules-left": ["hyprland/workspaces", "custom/spotify"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["network","pulseaudio","battery","clock"],
+  "modules-right": ["custom/wallpaper","network","pulseaudio","battery","clock"],
   "clock": {
     "format": "<span foreground='#f5c2e7'>   </span>{:%a %d %H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
@@ -47,5 +47,16 @@
   "on-scroll-up": "playerctl next -p spotify",
   "on-scroll-down": "playerctl previous -p spotify",
   "max-length": 120
+  },
+  "custom/wallpaper": {
+    "exec": "basename $(grep '^wallpaper =' $HOME/.config/hypr/hyprpaper.conf 2>/dev/null | cut -d',' -f2 | tr -d ' ')",
+    "return-type": "text",
+    "interval": 1,
+
+    "format": "<span size='13000' foreground='#cba6f7'>  </span>{}",
+
+    "on-click": "$HOME/.config/waybar/pick-wallpaper.sh",
+    "on-scroll-up": "$HOME/.config/hypr/random-wallpaper.sh",
+    "on-scroll-down": "$HOME/.config/hypr/random-wallpaper.sh"
   }
 }
