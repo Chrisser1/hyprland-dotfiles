@@ -1,8 +1,8 @@
 {
   "position": "top",
-  "modules-left": ["hyprland/workspaces"],
+  "modules-left": ["hyprland/workspaces", "custom/spotify"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["network", "pulseaudio", "battery", "clock"],
+  "modules-right": ["network","pulseaudio","battery","clock"],
   "clock": {
     "format": "<span foreground='#f5c2e7'>   </span>{:%a %d %H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
@@ -36,5 +36,16 @@
           "default": ["", "", " "]
       },
       "on-click": "pavucontrol"
+  },
+  "custom/spotify": {
+  "exec": "tail -n1 -F /tmp/spotify.json 2>/dev/null",
+  "interval": 0,                     // endless stream
+  "return-type": "json",
+  "escape": false,
+  "format": "{text}",
+  "on-click": "playerctl play-pause -p spotify",
+  "on-scroll-up": "playerctl next -p spotify",
+  "on-scroll-down": "playerctl previous -p spotify",
+  "max-length": 120
   }
 }
