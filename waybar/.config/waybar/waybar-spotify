@@ -37,7 +37,7 @@ make_frame() {
     { (( i==full && part )) && bar+="${blocks[part-1]}" || bar+=" - "; }
   done
 
-  text="<span foreground='$colour'>   [$bar] $(ts $pos)/$(ts $len) : $title - $artist</span>"
+  text="<span foreground='$colour'>   [$bar]   :  $title - $artist</span>"
   jq -c -n --arg text "$text" '{"text":$text}'
 }
 
