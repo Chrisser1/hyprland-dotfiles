@@ -9,11 +9,11 @@
 
 window#waybar {
     background: transparent;
-    background-color: @crust;
-    color: @overlay0;
+    background-color: @bg0;              /* Berserk bg0 */
+    color: @subtext1;                    /* Berserk subtext1 */
     transition-property: background-color;
     transition-duration: 0.1s;
-    border-bottom: 1px solid @overlay1;
+    border-bottom: 1px solid @subtext0;  /* Berserk subtext0 */
 }
 
 #window {
@@ -30,8 +30,8 @@ button {
 
 button:hover {
     background: inherit;
-    color: @mauve;
-    border-top: 2px solid @mauve;
+    color: @purple;
+    border-top: 2px solid @purple;
 }
 
 #workspaces button {
@@ -40,18 +40,18 @@ button:hover {
 
 #workspaces button.focused {
     background-color: rgba(0, 0, 0, 0.3);
-    color: @rosewater;
-    border-top: 2px solid @rosewater;
+    color: @text;
+    border-top: 2px solid @text;
 }
 
 #workspaces button.active {
     background-color: rgba(0, 0, 0, 0.3);
-    color: @mauve;
-    border-top: 2px solid @mauve;
+    color: @purple;
+    border-top: 2px solid @purple;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: @red;
 }
 
 #pulseaudio,
@@ -76,18 +76,18 @@ button:hover {
 }
 
 #clock {
-    color: @maroon;
-    border-bottom: 2px solid @maroon;
+    color: @text;
+    border-bottom: 2px solid @text;
 }
 
 #clock.date {
-    color: @mauve;
-    border-bottom: 2px solid @mauve;
+    color: @purple;
+    border-bottom: 2px solid @purple;
 }
 
 #pulseaudio {
-    color: @blue;
-    border-bottom: 2px solid @blue;
+    color: @cyan;
+    border-bottom: 2px solid @cyan;
 }
 
 #network {
@@ -97,7 +97,7 @@ button:hover {
 
 #idle_inhibitor {
     margin-right: 12px;
-    color: #7cb342;
+    color: @green;
 }
 
 #idle_inhibitor.activated {
@@ -120,7 +120,7 @@ button:hover {
 }
 
 #custom-vpn {
-    color: @lavender;
+    color: @cyan;
     border-radius: 15px;
     padding-left: 6px;
     padding-right: 6px;
@@ -128,23 +128,42 @@ button:hover {
 
 /* MPRIS‑style custom Spotify */
 #custom-spotify {
-    background-color: @crust;
-    background-color: @crust;
-    color: @overlay0;
+    background-color: @bg0;
+    color: @subtext1;
     transition-property: background-color;
     transition-duration: 0.1s;
-    border-bottom: 2px solid @spotify;
+    border-bottom: 2px solid @blue;
 }
 #custom-spotify:hover {
-    background-color: @surface2;
+    background-color: @bg2;              /* Berserk bg2 */
 }
 
 #custom-wallpaper {
-  color: @lavender;              /* Catppuccin Mocha colour */
-  border-bottom: 2px solid @lavender;
-  padding-left: 4px;
-  padding-right: 4px;
+    color: @cyan;
+    border-bottom: 2px solid @cyan;
+    padding: 0 4px;
 }
 #custom-wallpaper:hover {
-  background-color: @surface2;
+    background-color: @bg2;
+}
+
+
+/* CPU usage */
+#cpu {
+    color: @orange;                      /* Berserk orange */
+    border-bottom: 2px solid @orange;
+}
+#cpu:hover {
+    background-color: rgba(184, 134, 11, 0.1);
+    color: @white;                       /* Berserk white */
+}
+
+/* Memory usage */
+#memory {
+    color: @green;
+    border-bottom: 2px solid @green;
+}
+#memory:hover {
+    background-color: rgba(107, 142, 35, 0.1);
+    color: @white;
 }
