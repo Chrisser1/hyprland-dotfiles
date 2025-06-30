@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# One loop writes /tmp/spotify.json; --sleep N changes the rate.
+
+SLEEP="${1:-0.3}"      # default 0.3 s ≈ 3 fps
+MAX_ARTIST=12  MAX_TITLE=16  CELLS=14
+CLR_PLAY="#1ED760"  CLR_PAUSE="#f5c2e7"
+PLAYER=spotify
+JSON=/tmp/spotify.json
+> "$JSON"  # clear previous content
+
+
+meta() { playerctl -p $PLAYER metadata "$1" 2>/dev/null; }
+stat() { playerctl -p $PLAYER "$1"      2>/dev/null;    }
+crop() { local s=$1 m=$2; [[ ${#s} -le $m ]] && printf %s "$s" || printf '%.*s…' $((m-1)) "$s"; }
+ts()   { printf '%02d:%02d' $(($1/60)) $(($1%60)); }
+
+make_frame() {
+  [[ $(stat status) == "Playing" ]] && colour=$CLR_PLAY || colour=$CLR_PAUSE
+  artist=$(crop "$(meta artist)" $MAX_ARTIST)
+  title=$(crop  "$(meta title)"  $MAX_TITLE)
+
+  # --- timing -------------------------------------------------
+  pos_f=$(stat position || echo 0)   # e.g. 144.156005
+  pos=${pos_f%%.*}                   # → 144  (integer seconds)
+
+  len_us=$(meta mpris:length || echo 0)   # microseconds
+  len=$(( len_us / 1000000 ))           # → seconds (≥ 1)
+  (( len == 0 )) && len=1                 # guard against /0
+
+
+  pct=$(( 100*pos/len ))
+  full=$(( pct*CELLS/100 ))
+  part=$(( (pct*CELLS*8/100)%8 ))
+  blocks=(▏ ▎ ▍ ▌ ▋ ▊ ▉ █)
+  bar=""; for ((i=0;i<CELLS;i++)); do
+    (( i < full )) && bar+="█" ||
+    { (( i==full && part )) && bar+="${blocks[part-1]}" || bar+=" - "; }
+  done
+
+  text="<span foreground='$colour'>   [$bar]   :  $title - $artist</span>"
+  jq -c -n --arg text "$text" '{"text":$text}'
+}
+
+while true; do
+  # ── If Spotify is closed, emit a blank frame once and sleep ───────
+  if ! playerctl -l 2>/dev/null | grep -qw "$PLAYER"; then
+      : > "$JSON"
+      echo '{"text":""}' >> "$JSON"
+      sleep "$SLEEP"
+      continue
+  fi
+
+  make_frame >> "$JSON"           # APPEND one JSON line
+  # truncate if file grows past 400 lines (optional)
+  (( $(wc -l < "$JSON") > 400 )) && : > "$JSON"
+  sleep "$SLEEP"
+done
