@@ -2,7 +2,7 @@
 # One loop writes /tmp/spotify.json; --sleep N changes the rate.
 
 SLEEP="${1:-0.3}"      # default 0.3 s ≈ 3 fps
-MAX_ARTIST=12  MAX_TITLE=16  CELLS=14
+MAX_ARTIST=12  MAX_TITLE=16  CELLS=20
 CLR_PLAY="#1ED760"  CLR_PAUSE="#f5c2e7"
 PLAYER=spotify
 JSON=/tmp/spotify.json
@@ -31,7 +31,7 @@ make_frame() {
   pct=$(( 100*pos/len ))
   full=$(( pct*CELLS/100 ))
   part=$(( (pct*CELLS*8/100)%8 ))
-  blocks=(▏ ▎ ▍ ▌ ▋ ▊ ▉ █)
+  blocks=(░ ░ ▒ ▒ ▓ ▓ █ █)
   bar=""; for ((i=0;i<CELLS;i++)); do
     (( i < full )) && bar+="█" ||
     { (( i==full && part )) && bar+="${blocks[part-1]}" || bar+=" - "; }
